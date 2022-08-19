@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import PropTypes from 'prop-types';
 
+// Types
 interface Props { lang?: string };
-
-interface PageElements {
+interface HeaderElements {
   heading2: {
     text: string
   }
@@ -15,7 +15,8 @@ interface PageElements {
   }
 }
 
-const fr: PageElements = {
+// I18n
+const fr: HeaderElements = {
   heading2: {
     text: 'Développeur web'
   },
@@ -26,7 +27,7 @@ const fr: PageElements = {
   }
 };
 
-const en: PageElements = {
+const en: HeaderElements = {
   heading2: {
     text: 'Web developer'
   },
@@ -38,7 +39,7 @@ const en: PageElements = {
 };
 
 const Header = ({ lang }: Props): ReactElement => {
-  const { heading2, versionLink }: PageElements = lang === 'en'
+  const { heading2, versionLink }: HeaderElements = lang === 'en'
     ? { ...en }
     : { ...fr };
 

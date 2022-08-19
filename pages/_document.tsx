@@ -16,6 +16,7 @@ export default function Document(): ReactElement {
         <meta name="rating" content="general" />
         <meta name="verify-v1" content="1LpYuCxQDl9iWbr66GRZhqUQUuMlRaX6fNkHpNekeA4=" />
         <meta name="y_key" content="f1b1ecf1d1f8026f" />
+        <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
       </Head>
 
       <body key="abc" className="bg-white black-80 h-100">

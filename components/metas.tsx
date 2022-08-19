@@ -2,40 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
+// Types
 interface Props {
   lang: string
 };
 
-const metas = (lang: string): Record<string, string> => ({
-  'dc.description':
-    lang === 'fr'
-      ? 'Adrien Petitjean développeur web, webdevelop.fr'
-      : 'Adrien Petitjean Web developer',
-  description:
-    lang === 'fr'
-      ? 'Adrien Petitjean développeur web, webdevelop.fr'
-      : 'Adrien Petitjean Web developer',
-  keywords:
-    lang === 'fr'
-      ? 'Adrien Petitjean, développeur web, PHP, SQL, nodeJs,  JavaScript, AJAX, web'
-      : 'Adrien Petitjean, web developer, software engineer'
-});
+interface Metadata {
+  keywords: string
+  description: string
+  title: {
+    text: string
+  }
+}
 
-const title = (lang: string): string =>
-  lang === 'fr'
-    ? 'Développeur Web : Adrien Petitjean - webdevelop.fr'
-    : 'Adrien Petitjean - Web developer';
+// I18n
+const fr: Metadata = {
+  description: 'Adrien Petitjean développeur web, webdevelop.fr',
+  title: {
+    text: 'Développeur Web : Adrien Petitjean - webdevelop.fr'
+  },
+  keywords: 'Adrien Petitjean, développeur web, PHP, SQL, nodeJs,  JavaScript, AJAX, web'
+};
 
-export const Metas: React.FunctionComponent<Props> = ({ lang }) => (
-  <Head>
-    <title>{title(lang)}</title>
-    <meta httpEquiv="content-language" content={lang} />
-    <meta name="dc.description" content={metas(lang)['dc.description']} />
-    <meta name="keywords" content={metas(lang).keywords} />
-    <meta name="description" content={metas(lang).description} />
-    <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
-  </Head>
-);
+const en: Metadata = {
+  description: 'Adrien Petitjean Web developer',
+  title: {
+    text: 'Adrien Petitjean - Web developer'
+  },
+  keywords: 'Adrien Petitjean, web developer, software engineer'
+
+};
+
+export const Metas: React.FunctionComponent<Props> = ({ lang }) => {
+  const { description, title: { text: textTitle }, keywords }: Metadata = lang === 'en'
+    ? { ...en }
+    : { ...fr };
+  return (
+    <Head>
+      <title>{textTitle}</title>
+      <meta httpEquiv="content-language" content={lang} />
+      <meta name="dc.description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="description" content={description} />
+    </Head>
+  );
+};
 
 Metas.propTypes = {
   lang: PropTypes.oneOf(['fr', 'en']).isRequired
