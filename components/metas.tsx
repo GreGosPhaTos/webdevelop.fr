@@ -33,7 +33,6 @@ export const Metas: React.FunctionComponent<Props> = ({ lang }) => (
     <meta name="dc.description" content={metas(lang)['dc.description']} />
     <meta name="keywords" content={metas(lang).keywords} />
     <meta name="description" content={metas(lang).description} />
-    <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
   </Head>
 );
 
