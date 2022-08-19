@@ -3,20 +3,6 @@ import { Html, Head, Main, NextScript } from 'next/document';
 import { Metas } from '../components/metas';
 import Script from 'next/script';
 
-class HeadProduction extends Head {
-  render(): ReactElement {
-    const { head } = this.context._documentProps;
-    const children = this.props.children;
-    return (
-      <head {...this.props}>
-        {children}
-        {head}
-        {this.getCssLinks()}
-      </head>
-    );
-  }
-}
-
 export default function Document(): ReactElement {
   return (
     <Html >
