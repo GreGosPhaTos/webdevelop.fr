@@ -8005,6 +8005,11 @@ code {
   }
 }
 
+.moon {
+  z-index: -1;
+  position: absolute;
+}
+
 .bg_light {
   background: url(https://webdevelop.fr/bg-4k.jpg) repeat top center;
 }
@@ -8022,8 +8027,8 @@ code {
   }
 } */
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:550px) {
   .bg_light {
-    background: none;
+    background: #FFF;
   }
 }
