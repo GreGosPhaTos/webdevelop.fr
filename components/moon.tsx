@@ -8,9 +8,9 @@ function Sphere(props: any): React.ReactElement {
   const base = useLoader(THREE.TextureLoader, './2k_moon.jpeg');
   useFrame((_state, delta) => {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    (ref?.current as any).rotation.x += delta * 0.01;
+    (ref?.current as any).rotation.x += delta * 0.005;
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    (ref?.current as any).rotation.y += delta * 0.1;
+    (ref?.current as any).rotation.y += delta * 0.03;
   });
 
   return (
@@ -31,7 +31,7 @@ export const Moon: React.FunctionComponent = () => {
   }
 
   return (
-    <div style={{ position: 'absolute', zIndex: -1, width: '100%', height: '100%' }}>
+    <div style={{ position: 'absolute', zIndex: -1, right: 0, top: '-15%', width: '80%', height: '100%' }}>
       <Canvas>
         <Sphere position={[-1.5, 0, 0]} />
       </Canvas >
