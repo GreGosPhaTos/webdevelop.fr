@@ -8,7 +8,7 @@ import Content from '../components/content';
 
 const HomeEN: NextPage = () => {
   return (
-    <div className="cf h-100 min-h-100 bg_light">
+    <div className="cf h-100 min-h-100">
       <Metas lang='en' />
       <div className="flex flex-column h-100 fl ma0 pa3 pa4-ns bg-white black-70 measure-narrow f3 times">
         <Header lang='en' />

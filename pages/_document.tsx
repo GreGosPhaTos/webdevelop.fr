@@ -19,7 +19,7 @@ export default function Document(): ReactElement {
         <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
       </Head>
 
-      <body key="abc" className="bg-white black-80 h-100">
+      <body key="abc" className="bg_light black-80 h-100">
         <Main />
         <NextScript />
         <Script
