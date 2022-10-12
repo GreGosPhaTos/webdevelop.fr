@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import useWindowDimensions from '../hooks/useWindowsDimensions';
 
 function Sphere(props: any): React.ReactElement {
   const ref = useRef();
@@ -25,12 +24,6 @@ function Sphere(props: any): React.ReactElement {
 }
 
 export const Moon: React.FunctionComponent = () => {
-  const windowDimensions = useWindowDimensions();
-  const minimumWidth = 550;
-  if (windowDimensions.width < minimumWidth) {
-    return <></>;
-  }
-
   return (
     <div className='moon'>
       <Canvas>
