@@ -23,7 +23,7 @@ const fr: ContentElements = {
   firstParagraph: { text: 'Toujours enthousiaste d’apprendre de nouvelles choses.' },
   secondParagraph: {
     text: 'Développeur de logiciel sénior @',
-    renderLink: () => <a className="link dim blue" href="https://unity.com/" title="Unity" > Unity</a>
+    renderLink: () => <a className="link dim blue" href="https://unity.com/" title="Unity" >Unity</a>
   },
   thirdParagraph: {
     renderLink: () => <a className="link dim blue" href="https://medium.com/@adrien.petitjean84" title="Mes articles">Mes articles</a>
@@ -36,7 +36,7 @@ const en: ContentElements = {
   },
   secondParagraph: {
     text: 'Senior software developer @',
-    renderLink: () => <a className="link dim blue" href="https://unity.com/" title="Unity" > Unity</a>
+    renderLink: () => <a className="link dim blue" href="https://unity.com/" title="Unity" >Unity</a>
   },
   thirdParagraph: {
     renderLink: () => <a className="link dim blue" href="https://medium.com/@adrien.petitjean84" title="My Posts">My posts</a>
