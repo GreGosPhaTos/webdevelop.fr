@@ -8007,7 +8007,10 @@ code {
 
 .moon {
   z-index: -1;
-  position: absolute;
+  position: fixed;
+  margin-left: 10%;
+  width: 1000px;
+  height: 900px;
 }
 
 .bg_light {
@@ -8030,5 +8033,9 @@ code {
 @media screen and (max-width:550px) {
   .bg_light {
     background: #FFF;
+  }
+
+  .moon {
+    display: none;
   }
 }
