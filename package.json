@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production && next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gsutil -m rsync -x '.DS_Store' -d -r ./out gs://webdevelop.fr"
+    "deploy": "gsutil -o \"GSUtil:parallel_process_count=1\" -m rsync -x '.DS_Store' -d -r ./out gs://webdevelop.fr"
   },
   "dependencies": {
     "@react-three/fiber": "^8.8.9",
