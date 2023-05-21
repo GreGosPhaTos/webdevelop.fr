@@ -19,7 +19,7 @@ export default function Document(): ReactElement {
         <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
       </Head>
 
-      <body key="abc" className="bg_light black-80 h-100">
+      <body key="abc">
         <Main />
         <NextScript />
         <Script
@@ -35,6 +35,7 @@ export default function Document(): ReactElement {
             gtag('config', 'UA-12007647-1');
           `}
         </Script>
+        <script src="effects.js"></script>
       </body>
     </Html>
   );

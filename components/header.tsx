@@ -1,56 +1,79 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
+import { IntlProvider, FormattedMessage, FormattedNumber } from 'react-intl';
 import PropTypes from 'prop-types';
+import anime from 'animejs';
 
 // Types
 interface Props { lang?: string };
-interface HeaderElements {
-  heading2: {
-    text: string
-  }
-
-  versionLink: {
-    href: string
-    title: string
-    text: string
-  }
-}
 
 // I18n
+const messages = {
+
+};
 const fr: HeaderElements = {
   heading2: {
     text: 'Développeur web'
-  },
-  versionLink: {
-    href: './index-en.html',
-    title: 'Version Anglaise',
-    text: 'EN'
   }
+  // versionLink: {
+  //   href: './index-en.html',
+  //   title: 'Version Anglaise',
+  //   text: 'EN'
+  // }
 };
 
 const en: HeaderElements = {
   heading2: {
     text: 'Web developer'
-  },
-  versionLink: {
-    href: './',
-    title: 'French version',
-    text: 'FR'
   }
 };
 
 const Header = ({ lang }: Props): ReactElement => {
-  const { heading2, versionLink }: HeaderElements = lang === 'en'
+  const { heading2 }: HeaderElements = lang === 'en'
     ? { ...en }
     : { ...fr };
+  const headerRef = useRef(null);
+  const parallaxHeadingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // const h1Element = parallaxHeadingRef.current;
+    const animation = anime({
+      targets: parallaxHeadingRef.current,
+      // scale: 1 + scrollPosition * 0.0003,
+      // translateY: -scrollPosition * 0.5,
+      translateY: -450,
+      // opacity: 1 - scrollPosition * 0.0002,
+      easing: 'easeInOutQuad',
+      autoplay: false,
+      elasticity: 200
+    });
+
+    const handleScroll = (): void => {
+      const scrollPosition = window.scrollY;
+      if (parallaxHeadingRef?.current != null) {
+        animation.seek(animation.duration * (scrollPosition / 1000));
+      }
+    };
+
+    // Attach scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="bb b--black-70 pv4">
-      <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir">Adrien Petitjean</h3>
-      <h2 className="f3 fw4 i lh-title mt0">{heading2.text}</h2>
-      <p className="times lh-copy measure f4 mt0">
-        <a className="link dim blue" href={versionLink.href} title={versionLink.title}>{versionLink.text}</a>
-      </p>
-    </header>
+    <>
+      <div id="top" className="header-container">
+      </div>
+      <header ref={headerRef}>
+        <div ref={parallaxHeadingRef} className="parallax-heading">
+          <h1>ADRIEN PETITJEAN</h1>
+          <h2>{heading2.text}</h2>
+        </div>
+      </header>
+    </>
   );
 };
 

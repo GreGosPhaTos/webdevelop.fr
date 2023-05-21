@@ -26,8 +26,8 @@ function Sphere(props: any): React.ReactElement {
 export const Moon: React.FunctionComponent = () => {
   return (
     <div className='moon'>
-      <Canvas>
-        <Sphere position={[0, 1.4, 0]} />
+      <Canvas >
+        <Sphere position={[-2.4, 0, 0]} />
       </Canvas >
     </div>
   );

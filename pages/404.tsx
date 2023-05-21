@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import { Metas } from '../components/metas';
 import Head from 'next/head';
 import Footer from '../components/footer';
-import Header from '../components/header';
+import Header from '../components/header_old';
 
 const Home: NextPage = () => {
   return (
