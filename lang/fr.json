@@ -1,0 +1,18 @@
+{
+  "title": {
+    "defaultMessage":
+  },
+
+  'dc.description': {
+    defaultMessage: ''
+  },
+  keywords: {
+    defaultMessage: ''
+  },
+  'meta.description': {
+    defaultMessage: ''
+  },
+  lang: {
+    defaultMessage: 'fr'
+  }
+}

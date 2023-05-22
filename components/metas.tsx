@@ -1,53 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
-
-// Types
-interface Props {
-  lang: string
-};
-
-interface Metadata {
-  keywords: string
-  description: string
-  title: {
-    text: string
-  }
-}
+import { useIntl } from 'react-intl';
 
 // I18n
-const fr: Metadata = {
-  description: 'Adrien Petitjean développeur web, webdevelop.fr',
+const messages = {
   title: {
-    text: 'Développeur Web : Adrien Petitjean - webdevelop.fr'
+    id: 'meta.title',
+    defaultMessage: 'Développeur Web : Adrien Petitjean - webdevelop.fr'
   },
-  keywords: 'Adrien Petitjean, développeur web, PHP, SQL, nodeJs,  JavaScript, AJAX, web'
+  'dc.description': {
+    id: 'dc.description',
+    defaultMessage: 'Adrien Petitjean développeur web, webdevelop.fr'
+  },
+  keywords: {
+    id: 'meta.keywords',
+    defaultMessage: 'Adrien Petitjean, développeur web, PHP, SQL, nodeJs,  JavaScript, AJAX, web'
+  },
+  'meta.description': {
+    id: 'meta.description',
+    defaultMessage: 'Adrien Petitjean développeur web, webdevelop.fr'
+  },
+  locale: {
+    id: 'locale',
+    defaultMessage: 'fr'
+  }
 };
 
-const en: Metadata = {
-  description: 'Adrien Petitjean Web developer',
-  title: {
-    text: 'Adrien Petitjean - Web developer'
-  },
-  keywords: 'Adrien Petitjean, web developer, software engineer'
-
-};
-
-export const Metas: React.FunctionComponent<Props> = ({ lang }) => {
-  const { description, title: { text: textTitle }, keywords }: Metadata = lang === 'en'
-    ? { ...en }
-    : { ...fr };
+export const Metas: React.FunctionComponent = () => {
+  const intl = useIntl();
   return (
     <Head>
-      <title>{textTitle}</title>
-      <meta httpEquiv="content-language" content={lang} />
-      <meta name="dc.description" content={description} />
-      <meta name="keywords" content={keywords} />
-      <meta name="description" content={description} />
+      <title>{intl.formatMessage(messages.title)}</title>
+      <meta httpEquiv="content-language" content={intl.formatMessage(messages.locale)} />
+      <meta name="dc.description" content={intl.formatMessage(messages['dc.description'])} />
+      <meta name="keywords" content={intl.formatMessage(messages.keywords)} />
+      <meta name="description" content={intl.formatMessage(messages['meta.description'])} />
     </Head>
   );
-};
-
-Metas.propTypes = {
-  lang: PropTypes.oneOf(['fr', 'en']).isRequired
 };

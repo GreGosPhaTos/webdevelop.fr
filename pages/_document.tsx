@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
-import { Metas } from '../components/metas';
 import Script from 'next/script';
 
 export default function Document(): ReactElement {
   return (
     <Html >
-      <Metas lang="fr" />
+      {/* TODO */}
+      {/* <Metas lang="fr" /> */}
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="author" content="webdevelop" />

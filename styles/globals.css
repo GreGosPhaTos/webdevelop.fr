@@ -26,7 +26,6 @@
 }
 
 * {
-  background-color: transparent;
   margin: 0;
   padding: 0;
   z-index: 1;
@@ -40,8 +39,9 @@ html {
   min-width: var(--min-screen-width);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: var(--color-secondary-dark);
   color: var(--color-secondary-dark);
+  background-color: var(--color-secondary-dark);
+  overflow-x: hidden;
 }
 
 @media screen and (max-width: 1000px) {
@@ -49,9 +49,8 @@ html {
     font-size: calc(calc(var(--font-size) * 0.7) + 1vw);
   }
 
-  .background {
-    /* background-image: url(https://webdevelop.fr/bg-1024.jpg); */
-    background: linear-gradient(to bottom, transparent, url(https://webdevelop.fr/bg-1024.jpg));
+  .final_background {
+    background-image: url(https://webdevelop.fr/bg-1024.jpg);
   }
 
   .quote {
@@ -63,6 +62,24 @@ html {
     bottom: 10%;
     right: 5%;
   }
+
+  .main {
+    height: 340vh;
+  }
+
+  footer {
+    top: 320vh;
+    z-index: 4;
+  }
+
+  #who_am_i {
+    color: var(--color-primary-dark);
+    top: 120vh;
+  }
+
+  #my_work {
+    top: 220vh;
+  }
 }
 
 @media screen and (min-width: 1000px) {
@@ -72,9 +89,8 @@ html {
 
   }
 
-  .background {
-    /* background-image: url(https://webdevelop.fr/bg-fullhd.jpg); */
-    background: linear-gradient(to bottom, transparent, url(https://webdevelop.fr/bg-fullhd.jpg));
+  .final_background {
+    background-image: url(https://webdevelop.fr/bg-fullhd.jpg);
   }
 
   .quote {
@@ -94,32 +110,39 @@ html {
 
   .moon {
     position: absolute;
-    left: 10%;
-    bottom: 30%;
+    left: 50%;
+    bottom: 20%;
+    z-index: 5;
+    height: 60%;
+    width: 60%;
+  }
+
+  .main {
+    height: 500vh;
+  }
+
+  footer {
+    top: 520vh;
+    z-index: 4;
+  }
+
+  #who_am_i {
+    top: 200vh;
+  }
+
+  #my_work {
+    top: 380vh;
   }
 }
 
 @media screen and (min-width: 1900px) {
-  .background {
-    background: linear-gradient(transparent, url(https://webdevelop.fr/bg-4k.jpg));
+  .final_background {
+    background-image: url(https://webdevelop.fr/bg-4k.jpg);
   }
 }
 
 body {
   height: 100vh;
-}
-
-.background {
-  /* position: fixed; */
-  /* height: 100%; */
-  /* background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  background-position: center left;
-  background-repeat: no-repeat; */
-  background: linear-gradient(to bottom, var(--color-primary-dark), url(https://webdevelop.fr/bg-fullhd.jpg)) !important;
-
-  /* z-index: 0; */
 }
 
 ul,
@@ -170,12 +193,24 @@ h3 {
   padding-bottom: var(--spacing);
 }
 
+.final_background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
 
 main {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
+  background-color: var(--color-secondary-dark);
 }
 
 main>* {
@@ -186,7 +221,6 @@ main>* {
 header,
 footer {
   background-color: transparent;
-  position: relative;
   color: var(--color-secondary-light);
   vertical-align: middle;
 }
@@ -210,11 +244,17 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 3;
+  z-index: 7;
   height: 100%;
+  width: 100%;
+  /* left: -100%; */
+  left: 0%;
+  top: 0%;
   font-family: var(--font-family-1);
-  background-color: var(--color-secondary-dark);
-  display: none;
+  /* background-color: var(--color-secondary-dark); */
+  background-color: blue;
+  opacity: 0;
+  /* transform: translateX(100%); */
 }
 
 #nav-menu a {
@@ -231,7 +271,7 @@ header {
   padding: 15px;
   display: flex;
   justify-content: flex-end;
-  z-index: 2;
+  z-index: 8;
   background-color: transparent;
 }
 
@@ -293,6 +333,12 @@ header .parallax-heading {
   margin-top: var(--margin-h2) 0 0 0;
 }
 
+#who_am_i,
+#my_work,
+footer {
+  position: absolute;
+}
+
 #who_am_i {
   color: var(--color-primary-dark);
 }
@@ -340,16 +386,31 @@ footer {
 }
 
 
+footer .quote {
+  background-color: var(--color-secondary-dark);
+}
+
 footer #social {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-footer #social a>img {
-  height: 10vh;
-  width: 10vh;
+footer #social>* {
+  padding: 0;
+  margin: 0;
+}
+
+footer #social a {
+  height: 15vh;
+  width: 15vh;
   filter: invert(93%) sepia(16%) saturate(594%) hue-rotate(360deg) brightness(105%) contrast(94%);
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+footer #social a:hover {
+  opacity: 0.5;
 }
 
 .quote p {
@@ -361,4 +422,10 @@ footer #social a>img {
 .quote {
   padding: calc(var(--spacing)*2) var(--spacing);
   margin: var(--spacing);
+  border-radius: 3px;
+}
+
+.moon {
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
