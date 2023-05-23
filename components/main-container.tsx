@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
 import PropTypes from 'prop-types';
-import messages_en from '../lang/en-CA.json';
+import messages_en from '../lang/en.json';
 
 import Header from './header';
 import { Metas } from './metas';
@@ -9,16 +9,28 @@ import AboutMe from './about-me';
 import MyWork from './my-work';
 import Footer from './footer';
 import TopMenu from './top-menu';
-// import Content from './content';
-// import Footer from './footer';
+import TopMenuError from './top-menu-error';
 
 // Types
 interface Props {
   locale: string
+  errorPage?: '404'
 };
 
-export const MainContainer: React.FunctionComponent<Props> = ({ locale }) => {
-  const messages = locale !== 'fr' ? messages_en : {};
+export const MainContainer: React.FunctionComponent<Props> = ({ locale, errorPage }) => {
+  const messages = locale === 'en' ? messages_en : {};
+
+  if (errorPage === '404') {
+    return (
+      <IntlProvider locale={locale} defaultLocale='fr' messages={messages} >
+        <main>
+          <Metas />
+          <TopMenuError />
+          <Header errorPage={errorPage} />
+        </main >
+      </IntlProvider>
+    );
+  }
 
   return (
     <IntlProvider locale={locale} defaultLocale='fr' messages={messages} >
@@ -31,19 +43,15 @@ export const MainContainer: React.FunctionComponent<Props> = ({ locale }) => {
         <MyWork />
         <Footer />
       </main >
-      {/* <div className="cf h-100 min-h-100">
-        <Moon />
-        <Metas lang={lang} />
-        <div className="flex flex-column h-100 fl ma0 pa3 pa4-ns bg-white black-70 measure-narrow f3 times">
-          <Header lang={lang} />
-          <Content lang={lang} />
-          <Footer />
-        </div>
-      </div> */}
     </IntlProvider>
   );
 };
 
+MainContainer.defaultProps = {
+  errorPage: undefined
+};
+
 MainContainer.propTypes = {
-  locale: PropTypes.oneOf(['fr', 'en-CA']).isRequired
+  errorPage: PropTypes.oneOf(['404']),
+  locale: PropTypes.oneOf(['fr', 'en']).isRequired
 };

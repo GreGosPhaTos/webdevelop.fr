@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-export const useScroll = (callBack: (scrollPosition: number) => void): void => {
+export const useScroll = (callback: (scrollPosition: number) => void): void => {
+  const handleScroll = useCallback(() => {
+    const scrollPosition = window.scrollY;
+    callback(scrollPosition);
+  }, [callback]);
+
   useEffect(() => {
-    const handleScroll = (): void => {
-      const scrollPosition = window.scrollY;
-      callBack(scrollPosition);
-    };
-
     // Attach scroll event listener
     window.addEventListener('scroll', handleScroll);
 
@@ -14,5 +14,5 @@ export const useScroll = (callBack: (scrollPosition: number) => void): void => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [callBack]);
+  }, [handleScroll]);
 };

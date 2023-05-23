@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import anime from 'animejs';
@@ -8,8 +8,8 @@ function Sphere(props: any): React.ReactElement {
   const ref = useRef();
   const moonFadeInAnimationRef = useRef<anime.AnimeInstance | null>();
   // animation
-  const translateY = 150;
-  const translateX = 200;
+  const translateY = -30;
+  const translateX = 100;
   const duration = 6000;
   const base = useLoader(THREE.TextureLoader, './2k_moon.jpeg');
 
@@ -20,7 +20,7 @@ function Sphere(props: any): React.ReactElement {
     (ref?.current as any).rotation.y += delta * 0.03;
   });
 
-  const handleScroll = (scrollPosition: number): void => {
+  const handleScroll = useCallback((scrollPosition: number): void => {
     // Get the scroll height of the page
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     // 80% of the scrollHeight
@@ -32,7 +32,7 @@ function Sphere(props: any): React.ReactElement {
         moonFadeInAnimationRef.current.seek(moonFadeInAnimationRef.current.duration * scrollPercent);
       }
     };
-  };
+  }, []);
 
   useEffect(() => {
     const moonFadeInAnimation = anime({

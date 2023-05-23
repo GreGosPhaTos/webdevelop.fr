@@ -5,12 +5,9 @@ import Script from 'next/script';
 export default function Document(): ReactElement {
   return (
     <Html >
-      {/* TODO */}
-      {/* <Metas lang="fr" /> */}
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="author" content="webdevelop" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="ROBOTS" content="index, follow" />
         <meta name="Revisit-after" content="7 days" />
         <meta name="rating" content="general" />
@@ -35,7 +32,6 @@ export default function Document(): ReactElement {
             gtag('config', 'UA-12007647-1');
           `}
         </Script>
-        <script src="effects.js"></script>
       </body>
     </Html>
   );

@@ -1,15 +1,31 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement, useCallback, useEffect, useRef } from 'react';
 import anime from 'animejs';
 import { useScroll } from '../hooks/useScroll';
 import { Moon } from './moon';
+import { useHTMLSanitizer } from '../hooks/useHTMLSanitizer';
+import { useIntl } from 'react-intl';
+
+const messages = {
+  contactDiv: {
+    id: 'contactDiv',
+    defaultMessage:
+      '<h3>Contact</h3>' +
+      '<p>' +
+      'Ensemble d&eacute;crochons la lune !<br /><br />' +
+      "Contactez moi <a href='mailto:adrien.petitjean84@gmail.com'>adrien.petitjean84@gmail.com</a>" +
+      '</p>'
+  }
+
+};
 
 const Footer = (): ReactElement => {
-  const footerRef = useRef(null);
+  const intl = useIntl();
+  const footerRef = useRef<HTMLDivElement>(null);
   const finalBckRef = useRef(null);
   const animationRef = useRef<anime.AnimeInstance | null>(null);
   const backgroundFadeInAnimationRef = useRef<anime.AnimeInstance | null>(null);
   const backgroundFadeOutAnimationRef = useRef<anime.AnimeInstance | null>(null);
-  const handleScroll = (scrollPosition: number): void => {
+  const handleScroll = useCallback((scrollPosition: number): void => {
     // Get the scroll height of the page
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const startBackgrdAnimation = scrollHeight * 0.8;
@@ -17,7 +33,6 @@ const Footer = (): ReactElement => {
 
     if (backgroundFadeInAnimationRef.current != null && scrollPosition >= startBackgrdAnimation) {
       const percent = (scrollPosition - startBackgrdAnimation) / (scrollHeight - startBackgrdAnimation);
-      // backgroundFadeOutAnimationRef.current.pause();
       backgroundFadeInAnimationRef.current.seek(backgroundFadeInAnimationRef.current.duration * percent);
     };
 
@@ -25,13 +40,12 @@ const Footer = (): ReactElement => {
       const percent = (scrollPosition - startTranslateAnimation) / (scrollHeight - startTranslateAnimation);
       animationRef.current.seek(animationRef.current.duration * percent);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const animation = anime({
       targets: footerRef.current,
-      translateY: -400,
-      // delay: function (_el, i) { return i * 100; },
+      translateY: '-10vh',
       easing: 'easeInOutQuad',
       elasticity: 200,
       autoplay: false
@@ -55,19 +69,18 @@ const Footer = (): ReactElement => {
     backgroundFadeInAnimationRef.current = backgroundFadeInAnimation;
     backgroundFadeOutAnimationRef.current = backgroundFadeOutAnimation;
     animationRef.current = animation;
+    handleScroll(window.scrollY);
   }, []);
 
   useScroll(handleScroll);
+  const { sanitizeHTML } = useHTMLSanitizer();
 
   return (
     <>
       <footer ref={footerRef} id="contact" className='background'>
         <Moon />
         <div className="quote">
-          <h3>Contact me</h3>
-          <p>
-            Ready to reach for the moon together? Reach out to me at <a href='mailto:adrien.petitjean84@gmail.com'>adrien.petitjean84@gmail.com</a>.<br /><br />
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: sanitizeHTML(intl.formatMessage(messages.contactDiv)) }} />
           <p id='social'>
             <a href="https://github.com/GreGosPhaTos" title="Github">
               <img src='./github.svg' />

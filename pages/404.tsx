@@ -1,16 +1,10 @@
 import React from 'react';
 import type { NextPage } from 'next';
-
-import Head from 'next/head';
+import { MainContainer } from '../components/main-container';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>Page non trouvée</title>
-      </Head>
-      <div>NOT FOUND</div>
-    </div>
+    <MainContainer locale='en' errorPage='404' />
   );
 };
 

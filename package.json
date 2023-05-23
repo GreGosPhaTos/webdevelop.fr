@@ -7,11 +7,13 @@
     "build": "NODE_ENV=production && next build && next export",
     "start": "next start",
     "lint": "next lint",
+    "predeploy": "npm run build",
     "deploy": "gsutil -o \"GSUtil:parallel_process_count=1\" -m rsync -x '.DS_Store' -d -r ./out gs://webdevelop.fr"
   },
   "dependencies": {
     "@react-three/fiber": "^8.8.9",
     "animejs": "^3.2.1",
+    "isomorphic-dompurify": "^1.5.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

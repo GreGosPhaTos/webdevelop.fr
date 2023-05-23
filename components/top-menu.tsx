@@ -1,86 +1,132 @@
 import anime from 'animejs';
 import React, { MouseEvent, ReactElement, useEffect, useRef, useState } from 'react';
+import { useIntl } from 'react-intl';
+import { useLink } from '../hooks/useLink';
+
+const messages = {
+  'menu.aboutme': {
+    id: 'menu.aboutme',
+    defaultMessage: 'A propos de moi'
+  },
+
+  'menu.mywork': {
+    id: 'menu.mywork',
+    defaultMessage: 'Mes projets'
+  },
+
+  'menu.top': {
+    id: 'menu.aboutme',
+    defaultMessage: 'Intro'
+  },
+
+  'menu.contact': {
+    id: 'menu.contact',
+    defaultMessage: 'Contact'
+  },
+
+  'menu.langButtonText': {
+    id: 'menu.langButtonText',
+    defaultMessage: 'EN'
+  },
+
+  'menu.langButtonURL': {
+    id: 'menu.langButtonURL',
+    defaultMessage: 'https://webdevelop.fr/index-en.html'
+  }
+
+};
 
 const TopMenu = (): ReactElement => {
+  const intl = useIntl();
+  const { href } = useLink();
   const menuRef = useRef(null);
-  const menuFadeAnimationRef = useRef<anime.AnimeInstance | null>(null);
-  const removeBckAnimationRef = useRef<anime.AnimeInstance | null>(null);
-  const [menuIsShown, setMenuIsShown] = useState(false);
+  const btnRef = useRef(null);
+  const [menuIsShown, setMenuIsShown] = useState<boolean | null>(null);
   const [scrollPosition, setSrollPosition] = useState(0);
 
   const handleOnClickNav = (): void => {
-    if (menuFadeAnimationRef.current != null) {
-      menuFadeAnimationRef.current.play();
-    }
+    setMenuIsShown(!(menuIsShown ?? false));
   };
 
   const handleOnClickMenuItem = (scrollPosition?: number) => (event: MouseEvent<HTMLAnchorElement>): void => {
-    event.preventDefault();
     if (scrollPosition != null && scrollPosition > 0) {
-      setSrollPosition(scrollPosition);
+      event.preventDefault();
     }
 
-    if (menuFadeAnimationRef.current != null) {
-      menuFadeAnimationRef.current.complete = () => {
-        setMenuIsShown(!menuIsShown);
-        event.currentTarget?.click();
-      };
-
-      menuFadeAnimationRef.current.play();
-    }
+    setSrollPosition(scrollPosition ?? 0);
+    setMenuIsShown(menuIsShown === false);
   };
 
   useEffect(() => {
-    const fadeAnimation = anime({
+    const fadeAnimationIn = anime({
       targets: menuRef.current,
-      opacity: menuIsShown ? [1, 0] : [0, 1],
+      left: '0%',
       easing: 'linear',
       elasticity: 200,
       duration: 600,
-      autoplay: false,
-      complete: () => {
-        setMenuIsShown(!menuIsShown);
-      }
+      autoplay: false
     });
 
+    const fadeAnimationOut = anime({
+      targets: menuRef.current,
+      left: '-100%',
+      easing: 'linear',
+      elasticity: 200,
+      duration: 600,
+      autoplay: false
+    });
+
+    const btnAnimOptions = {
+      targets: btnRef.current,
+      rotate: '+=45',
+      easing: 'linear',
+      elasticity: 200,
+      duration: 600,
+      autoplay: false
+    };
+    const btnAnimationIn = anime(btnAnimOptions);
+    const btnAnimationOut = anime({ ...btnAnimOptions, rotate: '-=45' });
+
+    if (menuIsShown === true) {
+      fadeAnimationIn.play();
+      btnAnimationIn.play();
+    }
+
+    if (menuIsShown === false) {
+      fadeAnimationOut.play();
+      btnAnimationOut.play();
+    }
+  }, [menuIsShown]);
+
+  useEffect(() => {
+    const position = (scrollPosition * document.documentElement.scrollHeight) / 100;
+    window.scrollTo({ top: position, left: 0 });
     const removeBck = anime({
       targets: '.final_background',
       opacity: 0,
       easing: 'linear',
       duration: 20,
-      complete: () => {
-        console.log('back should be hidden');
-      },
-
       autoplay: false
     });
 
-    menuFadeAnimationRef.current = fadeAnimation;
-    removeBckAnimationRef.current = removeBck;
-  }, [menuIsShown, setMenuIsShown]);
-
-  useEffect(() => {
-    const position = (scrollPosition * document.documentElement.scrollHeight) / 100;
-    window.scrollTo({ top: position, left: 0 });
-    if (removeBckAnimationRef != null && scrollPosition < 90) {
-      removeBckAnimationRef.current?.play();
-    }
+    removeBck.play();
   }, [scrollPosition]);
 
-  const MenuLink = (props: { pos: number, ref?: React.MutableRefObject<HTMLAnchorElement | null>, anchor: string, text: string }): ReactElement =>
+  const MenuLink = (props: { anchor: string, text: string, pos?: number, ref?: React.MutableRefObject<HTMLAnchorElement | null> }): ReactElement =>
     <a onClick={handleOnClickMenuItem(props.pos)} href={props.anchor}>{props.text}</a>;
+  const handleOnClickLangButton = (): void => href(intl.formatMessage(messages['menu.langButtonURL']));
 
   return (
     <>
       <div id='top-menu'>
-        <button id="lang">EN</button>
-        <button onClick={handleOnClickNav} id="nav">+</button >
+        <button id="lang" onClick={handleOnClickLangButton}>{intl.formatMessage(messages['menu.langButtonText'])}</button>
+        <button ref={btnRef} onClick={handleOnClickNav} id="nav">+</button >
       </div >
       <div ref={menuRef} id='nav-menu'>
-        <MenuLink pos={30} anchor={'#who_am_i'} text={'About me'} />
-        <MenuLink pos={60} anchor={'#my_work'} text={'My work'} />
-        <MenuLink pos={90} anchor={'#contact'} text={'Contact me'} />
-        <MenuLink pos={0} anchor={'#top'} text={'Back to the top'} />
+        <MenuLink pos={20} anchor={'#who_am_i'} text={intl.formatMessage(messages['menu.aboutme'])} />
+        <MenuLink pos={50} anchor={'#my_work'} text={intl.formatMessage(messages['menu.mywork'])} />
+        <MenuLink pos={100} anchor={'#contact'} text={intl.formatMessage(messages['menu.contact'])} />
+        <MenuLink pos={0} anchor={'#top'} text={intl.formatMessage(messages['menu.top'])} />
       </div>
     </>
   );

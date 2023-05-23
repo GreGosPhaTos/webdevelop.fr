@@ -3,20 +3,16 @@
 :root {
   --font-family-1: 'Bebas Neue', helvetica, arial, sans-serif;
   /* --font-family-2: 'Bona Nova', 'Times New Roman', serif; */
-  /* --font-family-2: helvetica, arial, sans-serif; */
   --font-family-2: 'Palatino', 'Times New Roman', serif;
-  /* --font-family-2: 'Comic Sans MS', cursive; */
   --font-size: 16px;
   --font-size-h1-sans-mobile: 6rem;
   --font-size-h2-sans-mobile: 0.8rem;
   --spacing: 2rem;
   --margin-h1: 3rem;
+
   /** Screen **/
   --min-screen-width: 320px;
-  --screen-sm: 480px;
-  --screen-md: 1000px;
-  --border-radius: 35px;
-  --negative-border-radius: -35px;
+
   /** Colors  https://coolors.co/f4f7be-e5f77d-deba6f-823038-1e000e **/
   --color-primary-light: #F4F7BE;
   --color-secondary-light: #E5F77D;
@@ -57,36 +53,18 @@ html {
     width: 80%;
   }
 
-  .moon {
-    position: absolute;
-    bottom: 10%;
-    right: 5%;
-  }
-
   .main {
     height: 340vh;
   }
 
-  footer {
-    top: 320vh;
-    z-index: 4;
-  }
-
   #who_am_i {
     color: var(--color-primary-dark);
-    top: 120vh;
-  }
-
-  #my_work {
-    top: 220vh;
   }
 }
 
 @media screen and (min-width: 1000px) {
   html {
     font-size: calc(var(--font-size) + 1vw);
-    /* border: 4px solid red; */
-
   }
 
   .final_background {
@@ -94,7 +72,7 @@ html {
   }
 
   .quote {
-    width: 50%;
+    width: 70%;
   }
 
   #my_work,
@@ -108,34 +86,13 @@ html {
     align-items: center;
   }
 
-  .moon {
-    position: absolute;
-    left: 50%;
-    bottom: 20%;
-    z-index: 5;
-    height: 60%;
-    width: 60%;
-  }
-
-  .main {
-    height: 500vh;
-  }
-
-  footer {
-    top: 520vh;
-    z-index: 4;
-  }
-
-  #who_am_i {
-    top: 200vh;
-  }
-
-  #my_work {
-    top: 380vh;
-  }
 }
 
 @media screen and (min-width: 1900px) {
+  .quote {
+    width: 60%;
+  }
+
   .final_background {
     background-image: url(https://webdevelop.fr/bg-4k.jpg);
   }
@@ -225,6 +182,11 @@ footer {
   vertical-align: middle;
 }
 
+footer {
+  overflow: hidden;
+  z-index: 5;
+}
+
 header {
   position: fixed;
   z-index: 0;
@@ -236,6 +198,7 @@ header {
   display: flex;
   background-color: transparent;
   height: 100vh;
+  pointer-events: none;
 }
 
 #nav-menu {
@@ -247,14 +210,14 @@ header {
   z-index: 7;
   height: 100%;
   width: 100%;
-  /* left: -100%; */
-  left: 0%;
+  left: -100%;
   top: 0%;
   font-family: var(--font-family-1);
-  /* background-color: var(--color-secondary-dark); */
-  background-color: blue;
-  opacity: 0;
-  /* transform: translateX(100%); */
+  background-color: var(--color-primary-dark);
+  /* background-color: blue; */
+  /* opacity: 0; */
+  /* transition: pointer-events auto; */
+  pointer-events: auto;
 }
 
 #nav-menu a {
@@ -279,30 +242,24 @@ header {
   width: 50px;
   height: 50px;
   margin-left: 10px;
+  padding-top: 3px;
   background-color: var(--color-secondary-light);
   border-radius: 25px;
   font-family: var(--font-family-1);
   font-size: 16px;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+}
+
+#top-menu>button:hover {
+  opacity: 0.8;
 }
 
 #top-menu #nav {
   font-size: 30px;
   z-index: 4;
-}
-
-/* #top-menu #nav:hover {
-  transform: ;
-} */
-
-#top-menu #burger {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.line {
-  width: 38.25px;
-  height: 2px;
 }
 
 header .parallax-heading {
@@ -331,12 +288,6 @@ header .parallax-heading {
   font-weight: normal;
   letter-spacing: -0.03em;
   margin-top: var(--margin-h2) 0 0 0;
-}
-
-#who_am_i,
-#my_work,
-footer {
-  position: absolute;
 }
 
 #who_am_i {
@@ -385,9 +336,9 @@ footer {
   border-bottom: 1px solid var(--color-secondary-light);
 }
 
-
 footer .quote {
   background-color: var(--color-secondary-dark);
+  z-index: inherit;
 }
 
 footer #social {
@@ -406,6 +357,10 @@ footer #social a {
   width: 15vh;
   filter: invert(93%) sepia(16%) saturate(594%) hue-rotate(360deg) brightness(105%) contrast(94%);
   transition: opacity 0.5s ease;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+
   opacity: 1;
 }
 
@@ -426,6 +381,15 @@ footer #social a:hover {
 }
 
 .moon {
+  position: fixed;
   opacity: 0;
   transition: opacity 0.5s ease;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  width: calc(300% * 0.8);
+  height: calc(200% * 0.8);
+  z-index: 4;
+  left: -10%;
+  bottom: -40%;
 }

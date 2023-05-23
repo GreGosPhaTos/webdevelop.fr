@@ -31,6 +31,7 @@ export const Metas: React.FunctionComponent = () => {
   return (
     <Head>
       <title>{intl.formatMessage(messages.title)}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta httpEquiv="content-language" content={intl.formatMessage(messages.locale)} />
       <meta name="dc.description" content={intl.formatMessage(messages['dc.description'])} />
       <meta name="keywords" content={intl.formatMessage(messages.keywords)} />
