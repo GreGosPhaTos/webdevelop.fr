@@ -1,0 +1,18 @@
+{
+  "meta.title": "Adrien Petitjean - Web developer",
+  "dc.description": "Adrien Petitjean Web developer",
+  "meta.description": "Adrien Petitjean Web developer",
+  "meta.keywords": "Adrien Petitjean, web developer, software engineer",
+  "locale": "en",
+  "hero.heading2": "Web developer",
+  "aboutMeHeading": "About me",
+  "aboutMeParagraph": "&#128075; My name is Adrien, and I am a web developer.<br />I started my journey in 2008, and since then I have witnessed significant evolution in the web industry.<br /><br />I have had the opportunity to work with various technologies, and currently, I work for <a href=\"http://unity3d.com\">Unity technologies</a> as a Senior Fullstack developer.<br /><br />I enjoy all aspects of web development and am always eager to learn new things!<br /><br />Check out my complete professional experience on <a href=\"https://www.linkedin.com/in/adrien-petitjean-10916255\">LinkedIn</a>.<br /><br />I would be happy to chat with you, so please don&#39;t hesitate to <a href=\"/#contact\">reach out to me</a>.<br /><br />",
+  "myWorkDiv": "<h3>My work</h3><p>Here is a list of recent projects I have been involved in and &#128155; working on during my personal time.<br><br></p><ul><li>My<a href=\"https://medium.com/@adrien.petitjean84\">Medium posts</a></li><li>A template to create<a href=\"https://github.com/GreGosPhaTos/typescript-lambda\">AWS Lambdas with Typescript</a>.</li><li>The website of<a href=\"https://emma-roussel-naturopathe.com/\">Emma Roussel Naturopath</a>.</li><li><a href=\"https://github.com/GreGosPhaTos/bigfile\">Bigfile</a>: An executable that identifies large files on your system.</li><li><a href=\"https://github.com/GreGosPhaTos/zippy\">Zippy</a>: An archiver made with Electron JS.</li><li><a href=\"https://codepen.io/GreGosPhaTos/pen/yLxBdMB\">Some code pen projects</a></li><li>And <a href='https://github.com/GreGosPhaTos/webdevelop.fr'>this website</a> made with next js.</li></ul><p>You can explore all my work on my<a href=\"https://github.com/GreGosPhaTos\">GitHub account</a>.<br><br>Stay tuned for more exciting projects!</p>",
+  "contactDiv": "<h3>Contact me</h3><p>Ready to reach for the moon together?<br><br>Reach out to me at<a href=\"mailto:adrien.petitjean84@gmail.com\">adrien.petitjean84@gmail.com</a>.<br><br></p>",
+  "menu.aboutme": "About me",
+  "menu.mywork": "My work",
+  "menu.contact": "Contact me",
+  "menu.top": "Back to the top",
+  "menu.langButtonText": "FR",
+  "menu.langButtonURL": "https://webdevelop.fr"
+}

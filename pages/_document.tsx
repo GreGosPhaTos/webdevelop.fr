@@ -1,16 +1,13 @@
 import React, { ReactElement } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
-import { Metas } from '../components/metas';
 import Script from 'next/script';
 
 export default function Document(): ReactElement {
   return (
     <Html >
-      <Metas lang="fr" />
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="author" content="webdevelop" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="ROBOTS" content="index, follow" />
         <meta name="Revisit-after" content="7 days" />
         <meta name="rating" content="general" />
@@ -19,7 +16,7 @@ export default function Document(): ReactElement {
         <link rel="icon" type="image/x-icon" href="./favicon.ico"></link>
       </Head>
 
-      <body key="abc" className="bg_light black-80 h-100">
+      <body key="abc">
         <Main />
         <NextScript />
         <Script

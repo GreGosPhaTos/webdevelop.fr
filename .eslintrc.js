@@ -22,6 +22,7 @@ module.exports = {
   plugins: [
     'react'
   ],
+  ignorePatterns: ['public/*.js'],
   rules: {
     '@typescript-eslint/space-before-function-paren': 0,
     '@typescript-eslint/semi': [WARN, 'always'],

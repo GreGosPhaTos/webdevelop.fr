@@ -1,65 +1,71 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useCallback, useEffect, useRef } from 'react';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import anime from 'animejs';
+import { useScroll } from '../hooks/useScroll';
 
 // Types
-interface Props { lang?: string };
-interface HeaderElements {
-  heading2: {
-    text: string
-  }
-
-  versionLink: {
-    href: string
-    title: string
-    text: string
-  }
-}
+interface Props { errorPage?: string };
 
 // I18n
-const fr: HeaderElements = {
+const messages = {
   heading2: {
-    text: 'Développeur web'
-  },
-  versionLink: {
-    href: './index-en.html',
-    title: 'Version Anglaise',
-    text: 'EN'
+    id: 'hero.heading2',
+    defaultMessage: 'Développeur Web'
   }
 };
 
-const en: HeaderElements = {
-  heading2: {
-    text: 'Web developer'
-  },
-  versionLink: {
-    href: './',
-    title: 'French version',
-    text: 'FR'
-  }
-};
+const Header = ({ errorPage }: Props): ReactElement => {
+  const intl = useIntl();
+  const headerRef = useRef(null);
+  const animationRef = useRef<anime.AnimeInstance | null>(null);
+  const parallaxHeadingRef = useRef<HTMLDivElement>(null);
+  const handleScroll = useCallback((scrollPosition: number): void => {
+    if (animationRef.current != null) {
+      animationRef.current.seek(animationRef.current.duration * (scrollPosition / 2000));
+    }
+  }, []);
+  useEffect(() => {
+    animationRef.current = anime({
+      targets: parallaxHeadingRef.current,
+      translateY: -450,
+      easing: 'easeInOutSine',
+      autoplay: false,
+      elasticity: 200
+    });
+  }, []);
+  useScroll(handleScroll);
 
-const Header = ({ lang }: Props): ReactElement => {
-  const { heading2, versionLink }: HeaderElements = lang === 'en'
-    ? { ...en }
-    : { ...fr };
+  if (errorPage === '404') {
+    return (<>
+      <div id="top" className="header-container" />
+      <header>
+        <div className="parallax-heading">
+          <h1>oops.. Not found</h1>
+        </div>
+      </header >
+    </>);
+  }
 
   return (
-    <header className="bb b--black-70 pv4">
-      <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir">Adrien Petitjean</h3>
-      <h2 className="f3 fw4 i lh-title mt0">{heading2.text}</h2>
-      <p className="times lh-copy measure f4 mt0">
-        <a className="link dim blue" href={versionLink.href} title={versionLink.title}>{versionLink.text}</a>
-      </p>
-    </header>
+    <>
+      <div id="top" className="header-container" />
+      <header ref={headerRef}>
+        <div ref={parallaxHeadingRef} className="parallax-heading">
+          <h1>ADRIEN PETITJEAN</h1>
+          <h2>{intl.formatMessage(messages.heading2)}</h2>
+        </div>
+      </header>
+    </>
   );
 };
 
 Header.defaultTypes = {
-  lang: 'fr'
+  errorPage: undefined
 };
 
 Header.propTypes = {
-  lang: PropTypes.oneOf(['fr', 'en'])
+  errorPage: PropTypes.oneOf(['404'])
 };
 
 export default Header;
