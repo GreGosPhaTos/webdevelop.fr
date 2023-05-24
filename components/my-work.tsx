@@ -19,6 +19,7 @@ const messages = {
       "<li><a href='https://github.com/GreGosPhaTos/bigfile'>Bigfile</a> : Un executable qui identifie les gros fichiers sur votre syst&egrave;me.</li>" +
       "<li><a href='https://github.com/GreGosPhaTos/zippy'>Zippy</a> : Un archiveur fait avec Electron JS.</li>" +
       "<li><a href='https://codepen.io/GreGosPhaTos/pen/yLxBdMB'>Quelques projets sur CodePen</a></li>" +
+      "<li>Et <a href='https://github.com/GreGosPhaTos/webdevelop.fr'>ce site</a> fait avec next js.</li>" +
       '</ul>' +
       '<p>' +
       'Plus de projets &agrave; venir...' +
