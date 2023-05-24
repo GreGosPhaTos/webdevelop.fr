@@ -42,18 +42,15 @@ const TopMenu = (): ReactElement => {
   const menuRef = useRef(null);
   const btnRef = useRef(null);
   const [menuIsShown, setMenuIsShown] = useState<boolean | null>(null);
-  const [scrollPosition, setSrollPosition] = useState(0);
+  const [goTo, setGoTo] = useState<string | null>(null);
 
   const handleOnClickNav = (): void => {
     setMenuIsShown(!(menuIsShown ?? false));
   };
 
-  const handleOnClickMenuItem = (scrollPosition?: number) => (event: MouseEvent<HTMLAnchorElement>): void => {
-    if (scrollPosition != null && scrollPosition > 0) {
-      event.preventDefault();
-    }
-
-    setSrollPosition(scrollPosition ?? 0);
+  const handleOnClickMenuItem = (anchor: string) => (event: MouseEvent<HTMLAnchorElement>): void => {
+    event.preventDefault();
+    setGoTo(anchor);
     setMenuIsShown(menuIsShown === false);
   };
 
@@ -99,21 +96,35 @@ const TopMenu = (): ReactElement => {
   }, [menuIsShown]);
 
   useEffect(() => {
-    const position = (scrollPosition * document.documentElement.scrollHeight) / 100;
-    window.scrollTo({ top: position, left: 0 });
-    const removeBck = anime({
-      targets: '.final_background',
-      opacity: 0,
-      easing: 'linear',
-      duration: 20,
-      autoplay: false
-    });
+    if (goTo !== '#contact') {
+      const removeBck = anime({
+        targets: '.final_background',
+        opacity: 0,
+        easing: 'linear',
+        duration: 20,
+        autoplay: false
+      });
 
-    removeBck.play();
-  }, [scrollPosition]);
+      removeBck.play();
+    } else {
+      const addBck = anime({
+        targets: '.final_background',
+        opacity: 1,
+        easing: 'linear',
+        duration: 20,
+        autoplay: false
+      });
+
+      addBck.play();
+    }
+
+    if (goTo != null) {
+      href(goTo);
+    }
+  }, [goTo]);
 
   const MenuLink = (props: { anchor: string, text: string, pos?: number, ref?: React.MutableRefObject<HTMLAnchorElement | null> }): ReactElement =>
-    <a onClick={handleOnClickMenuItem(props.pos)} href={props.anchor}>{props.text}</a>;
+    <a onClick={handleOnClickMenuItem(props.anchor)} href={props.anchor}>{props.text}</a>;
   const handleOnClickLangButton = (): void => href(intl.formatMessage(messages['menu.langButtonURL']));
 
   return (
@@ -123,10 +134,10 @@ const TopMenu = (): ReactElement => {
         <button ref={btnRef} onClick={handleOnClickNav} id="nav">+</button >
       </div >
       <div ref={menuRef} id='nav-menu'>
-        <MenuLink pos={20} anchor={'#who_am_i'} text={intl.formatMessage(messages['menu.aboutme'])} />
-        <MenuLink pos={50} anchor={'#my_work'} text={intl.formatMessage(messages['menu.mywork'])} />
-        <MenuLink pos={100} anchor={'#contact'} text={intl.formatMessage(messages['menu.contact'])} />
-        <MenuLink pos={0} anchor={'#top'} text={intl.formatMessage(messages['menu.top'])} />
+        <MenuLink anchor={'#who_am_i'} text={intl.formatMessage(messages['menu.aboutme'])} />
+        <MenuLink anchor={'#my_work'} text={intl.formatMessage(messages['menu.mywork'])} />
+        <MenuLink anchor={'#contact'} text={intl.formatMessage(messages['menu.contact'])} />
+        <MenuLink anchor={'#top'} text={intl.formatMessage(messages['menu.top'])} />
       </div>
     </>
   );
