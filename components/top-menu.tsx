@@ -15,7 +15,7 @@ const messages = {
   },
 
   'menu.top': {
-    id: 'menu.aboutme',
+    id: 'menu.top',
     defaultMessage: 'Intro'
   },
 

@@ -99,13 +99,12 @@ html {
 }
 
 @media (orientation: portrait) {
-
   .moon {
-    width: calc(300% * 0.5) !important;
-    height: calc(200% * 0.5) !important;
-    left: 70% !important;
+    width: calc(300% * 0.4) !important;
+    height: calc(200% * 0.4) !important;
+    left: 75% !important;
     z-index: 6 !important;
-    bottom: 20% !important;
+    bottom: 40% !important;
   }
 }
 
