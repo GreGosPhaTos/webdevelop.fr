@@ -20,16 +20,16 @@ export default function Document(): ReactElement {
         <Main />
         <NextScript />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=UA-12007647-1"
+          src="https://www.googletagmanager.com/gtag/js?id=G-N692VP2XPT"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'UA-12007647-1');
+            gtag('config', 'G-N692VP2XPT');
           `}
         </Script>
       </body>

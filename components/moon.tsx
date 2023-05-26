@@ -8,8 +8,8 @@ function Sphere(props: any): React.ReactElement {
   const ref = useRef();
   const moonFadeInAnimationRef = useRef<anime.AnimeInstance | null>();
   // animation
-  const translateY = -30;
-  const translateX = 100;
+  const translateY = 3;
+  const translateX = -9;
   const duration = 6000;
   const base = useLoader(THREE.TextureLoader, './2k_moon.jpeg');
 
@@ -38,8 +38,8 @@ function Sphere(props: any): React.ReactElement {
     const moonFadeInAnimation = anime({
       targets: '.moon',
       opacity: 1,
-      translateX: -(translateX),
-      translateY: -(translateY),
+      translateX: `${translateX}vw`,
+      translateY: `${translateY}vh`,
       easing: 'easeInOutQuad',
       duration,
       autoplay: false

@@ -10,7 +10,7 @@ const messages = {
     defaultMessage:
       '<h3>Mes projets</h3>' +
       '<p>' +
-      'Voici une liste de quelques projets personnel r&eacute;cents pour lequels j\'ai consacr&eacute; du temps et du &#128155;.<br /><br />' +
+      'Voici une liste de quelques projets personnels r&eacute;cents pour lesquels j\'ai consacr&eacute; du temps et du &#128155;.<br /><br />' +
       '</p>' +
       '<ul>' +
       "<li>Mes <a href='https://medium.com/@adrien.petitjean84'>articles Medium</a></li>" +

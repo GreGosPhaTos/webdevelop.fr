@@ -28,7 +28,7 @@ const Header = ({ errorPage }: Props): ReactElement => {
   useEffect(() => {
     animationRef.current = anime({
       targets: parallaxHeadingRef.current,
-      translateY: -450,
+      translateY: '-60vh',
       easing: 'easeInOutSine',
       autoplay: false,
       elasticity: 200

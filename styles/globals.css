@@ -11,7 +11,7 @@
   --margin-h1: 3rem;
 
   /** Screen **/
-  --min-screen-width: 320px;
+  --min-screen-width: 250px;
 
   /** Colors  https://coolors.co/f4f7be-e5f77d-deba6f-823038-1e000e **/
   --color-primary-light: #F4F7BE;
@@ -98,7 +98,7 @@ html {
   }
 }
 
-@media (orientation: portrait) {
+@media (orientation: portrait) and (max-width: 600px) {
   .moon {
     width: calc(300% * 0.4) !important;
     height: calc(200% * 0.4) !important;
