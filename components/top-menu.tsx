@@ -96,17 +96,7 @@ const TopMenu = (): ReactElement => {
   }, [menuIsShown]);
 
   useEffect(() => {
-    if (goTo !== '#contact') {
-      const removeBck = anime({
-        targets: '.final_background',
-        opacity: 0,
-        easing: 'linear',
-        duration: 20,
-        autoplay: false
-      });
-
-      removeBck.play();
-    } else {
+    if (goTo === '#contact') {
       const addBck = anime({
         targets: '.final_background',
         opacity: 1,

@@ -21,15 +21,17 @@ const messages = {
 const Footer = (): ReactElement => {
   const intl = useIntl();
   const footerRef = useRef<HTMLDivElement>(null);
-  const finalBckRef = useRef(null);
+  const finalBckRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<anime.AnimeInstance | null>(null);
   const backgroundFadeInAnimationRef = useRef<anime.AnimeInstance | null>(null);
-  const backgroundFadeOutAnimationRef = useRef<anime.AnimeInstance | null>(null);
+  const startBackgrdAnimationPercent = 0.8;
+  const startTranslateAnimationPercent = 0.6;
+
   const handleScroll = useCallback((scrollPosition: number): void => {
     // Get the scroll height of the page
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const startBackgrdAnimation = scrollHeight * 0.8;
-    const startTranslateAnimation = scrollHeight * 0.6;
+    const startBackgrdAnimation = scrollHeight * startBackgrdAnimationPercent;
+    const startTranslateAnimation = scrollHeight * startTranslateAnimationPercent;
 
     if (backgroundFadeInAnimationRef.current != null && scrollPosition >= startBackgrdAnimation) {
       const percent = (scrollPosition - startBackgrdAnimation) / (scrollHeight - startBackgrdAnimation);
@@ -39,6 +41,19 @@ const Footer = (): ReactElement => {
     if (animationRef.current != null && scrollPosition >= startTranslateAnimation) {
       const percent = (scrollPosition - startTranslateAnimation) / (scrollHeight - startTranslateAnimation);
       animationRef.current.seek(animationRef.current.duration * percent);
+    }
+  }, []);
+  const removeOrAddBackground = useCallback((scrollPosition: number): void => {
+    // Get the scroll height of the page
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const startBackgrdAnimation = scrollHeight * startBackgrdAnimationPercent;
+    if (finalBckRef.current !== null && scrollPosition < startBackgrdAnimation && parseFloat(finalBckRef.current.style.opacity) > 0) {
+      anime({
+        targets: finalBckRef.current,
+        opacity: 0,
+        easing: 'linear',
+        duration: 20
+      });
     }
   }, []);
 
@@ -58,21 +73,13 @@ const Footer = (): ReactElement => {
       autoplay: false
     });
 
-    const backgroundFadeOutAnimation = anime({
-      targets: finalBckRef.current,
-      opacity: 0,
-      easing: 'easeInOutQuad',
-      duration: 1000,
-      autoplay: false
-    });
-
     backgroundFadeInAnimationRef.current = backgroundFadeInAnimation;
-    backgroundFadeOutAnimationRef.current = backgroundFadeOutAnimation;
     animationRef.current = animation;
     handleScroll(window.scrollY);
   }, []);
 
   useScroll(handleScroll);
+  useScroll(removeOrAddBackground);
   const { sanitizeHTML } = useHTMLSanitizer();
 
   return (

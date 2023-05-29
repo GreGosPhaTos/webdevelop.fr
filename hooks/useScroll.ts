@@ -10,6 +10,7 @@ export const useScroll = (callback: (scrollPosition: number) => void): void => {
     // Attach scroll event listener
     window.addEventListener('scroll', handleScroll);
 
+    handleScroll();
     // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
