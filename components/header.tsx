@@ -5,7 +5,9 @@ import anime from 'animejs';
 import { useScroll } from '../hooks/useScroll';
 
 // Types
-interface Props { errorPage?: string };
+interface Props {
+  errorPage?: string;
+}
 
 // I18n
 const messages = {
@@ -22,7 +24,9 @@ const Header = ({ errorPage }: Props): ReactElement => {
   const parallaxHeadingRef = useRef<HTMLDivElement>(null);
   const handleScroll = useCallback((scrollPosition: number): void => {
     if (animationRef.current != null) {
-      animationRef.current.seek(animationRef.current.duration * (scrollPosition / 2000));
+      animationRef.current.seek(
+        animationRef.current.duration * (scrollPosition / 2000)
+      );
     }
   }, []);
   useEffect(() => {
@@ -37,14 +41,16 @@ const Header = ({ errorPage }: Props): ReactElement => {
   useScroll(handleScroll);
 
   if (errorPage === '404') {
-    return (<>
-      <div id="top" className="header-container" />
-      <header>
-        <div className="parallax-heading">
-          <h1>oops.. Not found</h1>
-        </div>
-      </header >
-    </>);
+    return (
+      <>
+        <div id="top" className="header-container" />
+        <header>
+          <div className="parallax-heading">
+            <h1>oops.. Not found</h1>
+          </div>
+        </header>
+      </>
+    );
   }
 
   return (

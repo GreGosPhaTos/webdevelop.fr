@@ -1,5 +1,11 @@
 import anime from 'animejs';
-import React, { MouseEvent, ReactElement, useEffect, useRef, useState } from 'react';
+import React, {
+  MouseEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useIntl } from 'react-intl';
 import { useLink } from '../hooks/useLink';
 
@@ -33,7 +39,6 @@ const messages = {
     id: 'menu.langButtonURL',
     defaultMessage: 'https://webdevelop.fr/index-en.html'
   }
-
 };
 
 const TopMenu = (): ReactElement => {
@@ -48,11 +53,13 @@ const TopMenu = (): ReactElement => {
     setMenuIsShown(!(menuIsShown ?? false));
   };
 
-  const handleOnClickMenuItem = (anchor: string) => (event: MouseEvent<HTMLAnchorElement>): void => {
-    event.preventDefault();
-    setGoTo(anchor);
-    setMenuIsShown(menuIsShown === false);
-  };
+  const handleOnClickMenuItem =
+    (anchor: string) =>
+    (event: MouseEvent<HTMLAnchorElement>): void => {
+      event.preventDefault();
+      setGoTo(anchor);
+      setMenuIsShown(menuIsShown === false);
+    };
 
   useEffect(() => {
     const fadeAnimationIn = anime({
@@ -113,21 +120,46 @@ const TopMenu = (): ReactElement => {
     }
   }, [goTo]);
 
-  const MenuLink = (props: { anchor: string, text: string, pos?: number, ref?: React.MutableRefObject<HTMLAnchorElement | null> }): ReactElement =>
-    <a onClick={handleOnClickMenuItem(props.anchor)} href={props.anchor}>{props.text}</a>;
-  const handleOnClickLangButton = (): void => href(intl.formatMessage(messages['menu.langButtonURL']));
+  const MenuLink = (props: {
+    anchor: string;
+    text: string;
+    pos?: number;
+    ref?: React.MutableRefObject<HTMLAnchorElement | null>;
+  }): ReactElement => (
+    <a onClick={handleOnClickMenuItem(props.anchor)} href={props.anchor}>
+      {props.text}
+    </a>
+  );
+  const handleOnClickLangButton = (): void =>
+    href(intl.formatMessage(messages['menu.langButtonURL']));
 
   return (
     <>
-      <div id='top-menu'>
-        <button id="lang" onClick={handleOnClickLangButton}>{intl.formatMessage(messages['menu.langButtonText'])}</button>
-        <button ref={btnRef} onClick={handleOnClickNav} id="nav">+</button >
-      </div >
-      <div ref={menuRef} id='nav-menu'>
-        <MenuLink anchor={'#who_am_i'} text={intl.formatMessage(messages['menu.aboutme'])} />
-        <MenuLink anchor={'#my_work'} text={intl.formatMessage(messages['menu.mywork'])} />
-        <MenuLink anchor={'#contact'} text={intl.formatMessage(messages['menu.contact'])} />
-        <MenuLink anchor={'#top'} text={intl.formatMessage(messages['menu.top'])} />
+      <div id="top-menu">
+        <button id="lang" onClick={handleOnClickLangButton}>
+          {intl.formatMessage(messages['menu.langButtonText'])}
+        </button>
+        <button ref={btnRef} onClick={handleOnClickNav} id="nav">
+          +
+        </button>
+      </div>
+      <div ref={menuRef} id="nav-menu">
+        <MenuLink
+          anchor={'#who_am_i'}
+          text={intl.formatMessage(messages['menu.aboutme'])}
+        />
+        <MenuLink
+          anchor={'#my_work'}
+          text={intl.formatMessage(messages['menu.mywork'])}
+        />
+        <MenuLink
+          anchor={'#contact'}
+          text={intl.formatMessage(messages['menu.contact'])}
+        />
+        <MenuLink
+          anchor={'#top'}
+          text={intl.formatMessage(messages['menu.top'])}
+        />
       </div>
     </>
   );

@@ -165,6 +165,31 @@ h3 {
   padding-bottom: var(--spacing);
 }
 
+.primary_light {
+  color: var(--color-primary-light);
+}
+
+.secondary_light {
+  color: var(--color-secondary-light);
+}
+
+.flex_direction_column {
+  flex-direction: column;
+}
+
+.regular_text_container {
+  padding: 0 var(--spacing);
+  text-align: justify;
+}
+
+.regular_text_container>p,
+.regular_text_container>h4 {
+  color: var(--color-secondary-light);
+  padding: calc(var(--spacing)/4) 0;
+  text-align: justify;
+}
+
+
 .final_background {
   position: fixed;
   height: 100%;
